@@ -1,25 +1,26 @@
 import React from "react";
-import data from "../helper/data";
 
-const List = () => {
+const List = ({ startIndex, data }) => {
+  const endIndex = Math.min(startIndex + 5, data.length); // Gösterilecek son indeks
+  const visibleData = data.slice(startIndex, endIndex); // Gösterilecek veri aralığı
+
   return (
     <>
-    {data.map((data) => {
-      const { id, name, image, email, age } = data;
-      return (
+      {visibleData.map(({ id, name, image, email, age }) => (
         <article className="person" key={id}>
-          <img src={image} alt={"name"} />
+          <img src={image} alt={name} />
           <div>
             <h4>{name}</h4>
-            <p>{email}</p>
-            <p>{age} years</p>
+            <p>Email:{email}</p>
+            <p>Age:{age} years</p>
           </div>
         </article>
-      );
-    })}
-  
+      ))}
     </>
   );
 };
 
 export default List;
+
+
+
